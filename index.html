@@ -1,320 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>EMAAR Company</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="emaar.css">
-  <script>
-    function switchLang(lang) {
-      document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      document.getElementById('en-content').style.display = lang === 'en' ? 'block' : 'none';
-      document.getElementById('ar-content').style.display = lang === 'ar' ? 'block' : 'none';
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f5f8fa; color: #222; }
+    header { background: #fff; box-shadow: 0 2px 8px #eee; padding: 0.5em 0; }
+    .logo { font-size: 2.2em; font-weight: bold; letter-spacing: 0.1em; margin-left: 1em;  color: #2060b4; display: inline-block; padding-top: 8px;}
+    .logo span { color: red; }
+    nav { float: right; margin-right: 2em; }
+    nav ul { list-style: none; margin: 5px,0,0,0; padding:0,0; display: flex; }
+    nav li { margin: 0 1em; }
+    nav a { text-decoration: none; color: #2060b4; font-weight: 500; }
+    .lang-switch { float: right; margin-right: 1em; }
+    .container { max-width: 1100px; margin: 2em auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px #ddd; padding: 2em; text-align: center;}
+    .hero { text-align: center; padding: 2em 0; background: linear-gradient(90deg,#2060b4 100%,#fff 100%); color: #fff; border-radius: 10px; }
+    .hero h1 { font-size: 2em; }
+    .btn { background: #2060b4; color: #fff; padding: 0.7em 0.5em; border: none; border-radius: 5px; margin: 0.5em; cursor: pointer; font-size: 1em; }
+    h2 { color: #2060b4; margin-top: 2em; }
+    .qualities, .values, .services-list, .equipment-list { display: flex; flex-wrap: wrap; gap: 1em; }
+    .qualities div, .values div, .services-list div, .equipment-list div { background: #f0f4fa; border-radius: 8px; padding: 1em 1.5em; flex: 1 1 200px; min-width: 180px; }
+    .org-chart { margin: 2em 0; text-align: center; }
+    .org-chart img { max-width: 100%; border-radius: 10px; }
+    .projects { display: flex; flex-wrap: wrap; gap: 2em; }
+    .project-card { background: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 8px #eee; padding: 1em; flex: 1 1 300px; min-width: 270px; }
+    .project-card img { width: 100%; border-radius: 6px; margin-bottom: 0.5em; }
+    form { display: flex; flex-direction: column; gap: 1em; max-width: 400px; margin: auto; }
+    input, textarea { padding: 0.5em; border: 1px solid #b0c4de; border-radius: 5px; }
+    .footer { background: #2060b4; color: #fff; text-align: center; padding: 1em 0; margin-top: 2em; border-radius: 0 0 10px 10px; }
+    @media (max-width: 700px) {
+      .container, .projects, .qualities, .values, .services-list, .equipment-list { flex-direction: column; }
+      nav ul { flex-direction: column; }
+      nav { float: none; margin: 0; }
     }
-    window.onload = function() { switchLang('en'); }
-  </script>
-</head>
-<body>
-  <header class="only-english">
-    <div class="logo">EM<span>A</span>AR</div>
-    <div class="lang-switch">
-     <button class="btn" onclick="switchLang('en')">English</button>
-      <button class="btn" onclick="switchLang('ar')">العربية</button>
-    </div id="en-content" >
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#org">Organization</a></li>
-        <li><a href="#values">Values</a></li>
-        <li><a href="#contact">Contacts</a></li>
-      </ul>
-    </nav>
-    <div style="clear:both"></div>
-  </header>
-  
-  <!-- English Content -->
-  <div id="en-content">
-    <div class="container">
-      <section class="hero">
-        <h1>We are proud to achieve a distinguished status in the field of contracting and supplies that allow us to contribute in building our beloved company.</h1>
-      </section>
+    /* RTL styles for Arabic */
+    body[dir="rtl"] { font-family: 'Cairo', Arial, sans-serif; }
+    body[dir="rtl"] .container, body[dir="rtl"] .footer { text-align: center; }
+    body[dir="rtl"] .logo { margin-left: 40px; margin-right: 48; }
+    body[dir="rtl"] .only-english{display: none;}
+    body[dir="rtl"] .btn1{background: #2060b4; color: #fff; padding: 0.7em 0.5em; border: none; border-radius: 5px; margin: 0.5em; cursor: pointer; font-size: 1em;}
+    body[dir="ltr"] .only-arabic{display: none;}
+    body[dir="ltr"] .btn1{display: none;}
+    /* Hamburger icon style */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  margin: 0 1em;
+}
+.hamburger span {
+  /* display: block; */
+  width: 2em;
+  height: 0.22em;
+  margin: 0.32em 0;
+  background: #2060b4;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(0.54em) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-0.54em) rotate(-45deg);
+}
 
-      <h2 id="about">About EMAAR</h2>
-      <p>
-        EMAAR company provides many contracting, supplies, maintenance, logistical and operation services through professional experts and workers with the highest level of competence and experience.
-      </p>
-      <div class="qualities">
-        <div>Client satisfaction with services</div>
-        <div>High security</div>
-        <div>Permanent inspections</div>
-      </div>
+/* Responsive nav */
+@media (max-width: 900px) {
+  nav.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    height: 100vh;
+    width: 70vw;
+    max-width: 320px;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    box-shadow: 2px 0 12px #ddd;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    padding-top: 3em;
+  }
+  nav.main-nav.open {
+    transform: translateX(0);
+  }
+  .hamburger {
+    display: flex;
+  }
+  nav.main-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2em;
+    width: 100%;
+  }
+  nav.main-nav li {
+    margin: 1em 2em;
+  }
+  /* Hide nav by default on mobile */
+  nav.main-nav {
+    display: none;
+  }
+  nav.main-nav.open {
+    display: flex;
+  }
 
-      <h2 id="services">Our Services</h2>
-      <div class="services-list">
-        <div>
-          <strong>Infrastructural Work</strong>
-          <ul>
-            <li>Water and wastewater</li>
-            <li>Excavation and filling</li>
-            <li>Roads and paving</li>
-            <li>Pylons for lighting and monitoring cameras</li>
-            <li>Pitching and lining concrete</li>
-            <li>Piles</li>
-          </ul>
-        </div>
-        <div>
-          <strong>Supplying and Logistics</strong>
-          <ul>
-            <li>Pumps and submerged pumps</li>
-            <li>Safety equipment</li>
-            <li>Gravel and sand</li>
-            <li>Stones</li>
-            <li>Valves</li>
-            <li>All types of mechanical tools and equipment</li>
-            <li>Electrical generators, tools and cables</li>
-            <li>Pipes and fittings</li>
-            <li>Any other needed equipment for civil work</li>
-          </ul>
-        </div>
-        <div>
-          <strong>Construction</strong>
-          <ul>
-            <li>Buildings</li>
-            <li>Fences</li>
-            <li>Houses and Villas</li>
-            <li>Finishing all types of construction work</li>
-          </ul>
-        </div>
-        <div>
-          <strong>Heavy Equipment Rental</strong>
-          <ul>
-            <li>Bulldozer</li>
-            <li>Compactor</li>
-            <li>Drum Roller</li>
-            <li>Dump truck</li>
-            <li>Excavator</li>
-          </ul>
-        </div>
-      </div>
 
-      <h2 id="projects">Some of Our Previous Projects</h2>
-      <div class="projects">
-        <div class="project-card">
-          <img src="images/port-said-station.jpg" alt="East Port Said Power Station">
-          <strong>East Port Said Power Station</strong><br>
-          Total cost: 20,235,345 LE<br>
-          Main contractor: GeOcean (French Co.)<br>
-          <em>Supplies, Excavation, Pipe fitting, Equipment rental</em>
-        </div>
-        <div class="project-card">
-          <img src="images/control-building.jpg" alt="Control Building">
-          <strong>Control Building</strong><br>
-          Total cost: 9,450,000 LE<br>
-          Main contractor: Egyptian Maintenance Co.<br>
-        </div>
-        <div class="project-card">
-          <img src="images/Pipeline-Rehabilitation-L1.jpg" alt="Pipeline Rehabilitation L1">
-          <strong>First Phase Pipe Trench Rehabilitation</strong><br>
-          Total cost: 21,500,000 LE<br>
-          Main contractor: Egyptian Maintenance Co.<br>
-        </div>
-        <div class="project-card">
-          <img src="images/Pipeline-Rehabilitation-L3.jpg" alt="Pipeline Rehabilitation L3">
-          <strong>Third Phase Pipe Trench Rehabilitation</strong><br>
-          Total cost: 10,714,831 LE<br>
-          Main contractor: Egyptian Maintenance Co.<br>
-        </div>
-        <div class="project-card">
-          <img src="images/GENERAL-adminstartion.jpg" alt="General Administration Building">
-          <strong>General Administration Building</strong><br>
-          Total cost: 6,158,213 LE<br>
-          Main contractor: Egyptian Maintenance Co.<br>
-        </div>
-      </div>
-
-      <h2 id="org">Organization Chart</h2>
-      <div class="org-chart">
-        <img src="images/organization-hierarchy.png" alt="Organization Chart">
-      </div>
-
-      <h2 id="values">Our Values</h2>
-      <div class="values">
-        <div>Transparency</div>
-        <div>Respect of time</div>
-        <div>Work as a team</div>
-        <div>Perseverance</div>
-        <div>Creativity and innovation</div>
-      </div>
-
-      <h2 id="contact">Contact Us</h2>
-      
-      <form
-  action="https://formspree.io/f/xjkrwvyj"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
-    </div>
-    <div class="footer">
-      &copy; 2025 EMAAR. All rights reserved.
-    </div>
-  </div>
-
-  <!-- Arabic Content -->
-    <header class="only-arabic">
-    <div class="logo">EM<span>A</span>AR</div>
-    <div class="lang-switch">
-      <button class="btn" onclick="switchLang('en')">English</button>
-      <button class="btn" onclick="switchLang('ar')">العربية</button>
-    </div id="ar-content">
-    <nav>
-      <ul>
-        <li><a href="#about-ar">About</a></li>
-        <li><a href="#services-ar">Services</a></li>
-        <li><a href="#projects-ar">Projects</a></li>
-        <li><a href="#org-ar">Organization</a></li>
-        <li><a href="#values-ar">Values</a></li>
-        <li><a href="#contact-ar">Contact</a></li>
-      </ul>
-    </nav>
-    <div style="clear:both"></div>
-  </header>
-  <div id="ar-content" style="display:none">
-    <div class="container">
-      <section class="hero">
-        <h1>نحن فخورون بتحقيق مكانة متميزة في مجال المقاولات والتوريدات تتيح لنا المساهمة في بناء شركتنا الحبيبة.</h1>
-      </section>
-
-      <h2 id="about-ar">عن إعمار</h2>
-      <p>
-        تقدم شركة إعمار العديد من خدمات المقاولات والتوريدات والصيانة والخدمات اللوجستية والتشغيل من خلال خبراء محترفين وعمال ذوي كفاءة وخبرة عالية.
-      </p>
-      <div class="qualities">
-        <div>رضا العملاء عن الخدمات</div>
-        <div>أمان عالي</div>
-        <div>تفتيش دائم</div>
-      </div>
-
-      <h2 id="services-ar">خدماتنا</h2>
-      <div class="services-list">
-        <div>
-          <strong>الأعمال التحتية</strong>
-          <ul>
-            <li>مياه وصرف صحي</li>
-            <li>حفر وردم</li>
-            <li>طرق ورصف</li>
-            <li>أعمدة إنارة وكاميرات مراقبة</li>
-            <li>تبطين وصب خرسانة</li>
-            <li>خوازيق</li>
-          </ul>
-        </div>
-        <div>
-          <strong>التوريدات والخدمات اللوجستية</strong>
-          <ul>
-            <li>مضخات ومضخات غاطسة</li>
-            <li>معدات أمان</li>
-            <li>زلط ورمل</li>
-            <li>أحجار</li>
-            <li>محابس</li>
-            <li>جميع أنواع المعدات والأدوات الميكانيكية</li>
-            <li>مولدات وأدوات وكابلات كهربائية</li>
-            <li>أنابيب ووصلات</li>
-            <li>أي معدات أخرى مطلوبة للأعمال المدنية</li>
-          </ul>
-        </div>
-        <div>
-          <strong>الإنشاءات</strong>
-          <ul>
-            <li>مباني</li>
-            <li>أسوار</li>
-            <li>منازل وفيلات</li>
-            <li>تشطيب جميع أنواع أعمال البناء</li>
-          </ul>
-        </div>
-        <div>
-          <strong>تأجير المعدات الثقيلة</strong>
-          <ul>
-            <li>بلدوزر</li>
-            <li>مدحلة</li>
-            <li>رولر</li>
-            <li>سيارة نقل</li>
-            <li>حفار</li>
-          </ul>
-        </div>
-      </div>
-
-      <h2 id="projects-ar">بعض مشاريعنا السابقة</h2>
-      <div class="projects">
-        <div class="project-card">
-          <img src="images/port-said-station.jpg" alt="محطة كهرباء شرق بورسعيد">
-          <strong>محطة كهرباء شرق بورسعيد</strong><br>
-          التكلفة الإجمالية: 20,235,345 جنيه<br>
-          المقاول الرئيسي: GeOcean (شركة فرنسية)<br>
-          <em>توريدات، حفر، تركيب مواسير، تأجير معدات</em>
-        </div>
-        <div class="project-card">
-          <img src="images/control-building.jpg" alt="مبنى التحكم الآلي">
-          <strong>مبنى التحكم الآلي</strong><br>
-          التكلفة الإجمالية: 9,450,000 جنيه<br>
-          المقاول الرئيسي: شركة الصيانة المصرية<br>
-        </div>
-        <div class="project-card">
-          <img src="images/Pipeline-Rehabilitation-L1.jpg" alt="مشروع بنية تحتية">
-          <strong>مشروع بنية تحتية</strong><br>
-          التكلفة الإجمالية: 21,500,000 جنيه<br>
-          المقاول الرئيسي: شركة الصيانة المصرية<br>
-        </div>
-        <div class="project-card">
-          <img src="images/Pipeline-Rehabilitation-L3.jpg" alt="تأهيل خطوط المواسير">
-          <strong>تأهيل خطوط المواسير</strong><br>
-          التكلفة الإجمالية: 10,714,831 جنيه<br>
-          المقاول الرئيسي: شركة الصيانة المصرية<br>
-        </div>
-        <div class="project-card">
-          <img src="images/GENERAL-adminstartion.jpg" alt="مبنى الإدارة العامة">
-          <strong>مبنى الإدارة العامة</strong><br>
-          التكلفة الإجمالية: 6,158,213 جنيه<br>
-          المقاول الرئيسي: شركة الصيانة المصرية<br>
-        </div>
-      </div>
-
-      <h2 id="org-ar">الهيكل التنظيمي</h2>
-      <div class="org-chart">
-        <img src="images/organization-hierarchy.png" alt="الهيكل التنظيمي">
-      </div>
-
-      <h2 id="values-ar">قيمنا</h2>
-      <div class="values">
-        <div>الشفافية</div>
-        <div>احترام الوقت</div>
-        <div>العمل الجماعي</div>
-        <div>المثابرة</div>
-        <div>الإبداع والابتكار</div>
-      </div>
-
-      <h2 id="contact-ar">تواصل معنا</h2>
-      <form action="https://formspree.io/f/xjkrwvyj" method="post">
-        <input type="text" placeholder="الاسم" required>
-        <input type="email" placeholder="البريد الإلكتروني" required>
-        <input type="tel" placeholder="الهاتف">
-        <textarea placeholder="رسالتك" required></textarea>
-        <button class="btn" type="submit">إرسال</button>
-      </form>
-    </div>
-    <div class="footer">
-      &copy; 2025 إعمار. جميع الحقوق محفوظة.
-    </div>
-  </div>
-</body>
-</html>
+/* RTL support for nav */
+body[dir="rtl"] nav.main-nav {
+    left: 0 !important;
+    right: auto !important;
+    transform: translateX(-100%) !important;
+  }
+  body[dir="rtl"] nav.main-nav.open {
+    transform: translateX(0) !important;
+  }
+body[dir="rtl"] header {
+  direction: ltr !important;
+}}
+body[dir="rtl"] header {
+  direction: ltr !important;
+}
+.close-menu {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #2060b4;
+  cursor: pointer;
+  z-index: 30;
+}
+nav.main-nav.open .close-menu {
+  display: block; /* Show only when menu is open */
+}
